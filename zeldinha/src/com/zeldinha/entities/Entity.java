@@ -4,9 +4,9 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 public class Entity {
-	private int x, y;
-	private int width, height;
-	private BufferedImage sprite;
+	protected int x, y;
+	protected int width, height;
+	protected BufferedImage sprite;
 	
 	public Entity(int x, int y, int width, int height, BufferedImage sprite) {
 		this.x = x;
