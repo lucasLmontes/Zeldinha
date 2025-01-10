@@ -16,6 +16,7 @@ import javax.swing.JFrame;
 import com.zeldinha.entities.Entity;
 import com.zeldinha.entities.Player;
 import com.zeldinha.graficos.Spritesheet;
+import com.zeldinha.world.World;
 
 public class Game extends Canvas implements Runnable, KeyListener {
 	private static final long serialVersionUID = 1L;
@@ -26,13 +27,16 @@ public class Game extends Canvas implements Runnable, KeyListener {
 	private BufferedImage image;
 	
 	public List<Entity> entities;
-	public Spritesheet spritesheet;
+	public static Spritesheet spritesheet;
 	public Player player;
+	
+	public static World world;
 	
 	public Game() {
 		this.addKeyListener(this);
 		this.setPreferredSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
 		initFrame();
+		world = new World("/map.png");
 		image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 		entities = new ArrayList<Entity>();
 		spritesheet = new Spritesheet("/spritesheet.png");
@@ -85,7 +89,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		}
 		
 		Graphics g = image.getGraphics();
-		g.setColor(new Color(0, 0, 0));
+		g.setColor(new Color(0, 255, 0));
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		
 		for(int i = 0; i < entities.size(); i++) {
