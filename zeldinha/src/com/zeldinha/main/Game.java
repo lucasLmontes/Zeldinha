@@ -21,27 +21,27 @@ import com.zeldinha.world.World;
 public class Game extends Canvas implements Runnable, KeyListener {
 	private static final long serialVersionUID = 1L;
 	public static JFrame frame;
-	private int WIDTH = 256, HEIGHT = 176, SCALE = 3;
+	private int WIDTH = 240, HEIGHT = 160, SCALE = 3;
 	private Thread thread;
 	private boolean isRunning;
 	private BufferedImage image;
 	
-	public List<Entity> entities;
+	public static List<Entity> entities;
 	public static Spritesheet spritesheet;
-	public Player player;
+	public static Player player;
 	
-	public static World world;
+	public World world;
 	
 	public Game() {
 		this.addKeyListener(this);
 		this.setPreferredSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
 		initFrame();
-		world = new World("/map.png");
 		image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 		entities = new ArrayList<Entity>();
 		spritesheet = new Spritesheet("/spritesheet.png");
 		player = new Player(0, 0, 16, 16, spritesheet.getSprite(32, 0, 16, 16));
 		entities.add(player);
+		world = new World("/map.png");
 	}
 	
 	public void initFrame() {
@@ -89,9 +89,10 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		}
 		
 		Graphics g = image.getGraphics();
-		g.setColor(new Color(0, 255, 0));
+		g.setColor(new Color(0, 0, 0));
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		
+		world.render(g);
 		for(int i = 0; i < entities.size(); i++) {
 			Entity e = entities.get(i);
 			e.render(g);
